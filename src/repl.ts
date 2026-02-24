@@ -2,30 +2,30 @@ import { createInterface } from 'node:readline';
 import { exit } from 'node:process';
 
 export function startREPL(): void {
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: 'Pokedex >',
-  });
-
-  rl.prompt();
-
-  rl.on('line', (line: string) => {
-    switch (line.trim()) {
-      case '':
-        break;
-      default:
-        console.log(`Your command was: ${cleanInput(line.trim())[0]}`);
-        break;
-    }
+    const rl = createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        prompt: 'Pokedex >',
+    });
 
     rl.prompt();
-  }).on('close', () => {
-    console.log('Bye');
-    exit(0);
-  });
+
+    rl.on('line', (line: string) => {
+        switch (line.trim()) {
+            case '':
+                break;
+            default:
+                console.log(`Your command was: ${cleanInput(line.trim())[0]}`);
+                break;
+        }
+
+        rl.prompt();
+    }).on('close', () => {
+        console.log('Bye');
+        exit(0);
+    });
 }
 
 export function cleanInput(s: string): string[] {
-  return s.toLowerCase().trim().split(' ');
+    return s.toLowerCase().trim().split(' ');
 }
